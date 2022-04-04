@@ -22,14 +22,21 @@ const addProduct = async (name, quantity) => {
   return { id, name, quantity };
 };
 
-const updateProduct = async (name, quantity) => {
-  const query = 'SELECT * FROM StoreManager.products WHERE name = ?';
-  const [oldProduct] = await connection.execute(query, [name]);
+const updateProduct = async (id, name, quantity) => {
+  const oldProduct = await getById(id);
   if (oldProduct.lenght === 0) return false;
   const wantedId = oldProduct[0].id;
   const query2 = 'UPDATE StoreManager.products SET id = ?, name = ?, quantity = ? WHERE id = ?';
   await connection.execute(query2, [wantedId, name, quantity, wantedId]);
-  return { wantedId, name, quantity };
+  return { id: wantedId, name, quantity };
+};
+
+const deleteProduct = async (id) => {
+  const oldProduct = await getById(id);
+  if (oldProduct.lenght === 0) return false;
+  const query = 'DELETE FROM StoreManager.products WHERE id = ?';
+  await connection.execute(query, [id]);
+  return true;
 };
 
 module.exports = {
@@ -37,4 +44,5 @@ module.exports = {
     getById,
     addProduct,
     updateProduct,
+    deleteProduct,
 };

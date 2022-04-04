@@ -31,11 +31,23 @@ const addProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
+  const { id } = req.params;
   const { name, quantity } = req.body;
   try {
-    const product = await productsService.updateProduct(name, quantity);
+    const product = await productsService.updateProduct(id, name, quantity);
     if (product === false) return res.status(404).json({ message: 'Product not found' });
     return res.status(200).json(product);
+  } catch (err) {
+      return res.status(500).send({ message: err.message });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await productsService.deleteProduct(id);
+    if (product === false) return res.status(404).json({ message: 'Product not found' });
+    return res.status(204);
   } catch (err) {
       return res.status(500).send({ message: err.message });
   }
@@ -46,4 +58,5 @@ module.exports = {
   getById,
   addProduct,
   updateProduct,
+  deleteProduct,
 };

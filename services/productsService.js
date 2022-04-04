@@ -16,10 +16,16 @@ const addProduct = async (name, quantity) => {
   return product;
 };
 
-const updateProduct = async (name, quantity) => {
-  const product = await productsModel.updateProduct(name, quantity);
+const updateProduct = async (id, name, quantity) => {
+  const product = await productsModel.updateProduct(id, name, quantity);
   if (product === false) return false;
   return product;
+};
+
+const deleteProduct = async (id) => {
+  const product = await productsModel.deleteProduct(id);
+  if (product === false) return false;
+  return true;
 };
 
 module.exports = {
@@ -27,4 +33,5 @@ module.exports = {
   getById,
   addProduct,
   updateProduct,
+  deleteProduct,
 };
