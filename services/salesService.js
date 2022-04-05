@@ -6,11 +6,17 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const sales = await salesModel.getAll(id);
+  const sales = await salesModel.getById(id);
+  return sales;
+};
+
+const updateSale = async (id, productId, quantity) => {
+  const sales = await salesModel.updateSale(id, productId, quantity);
   return sales;
 };
 
 module.exports = {
   getAll,
   getById,
+  updateSale,
 };
