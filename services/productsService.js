@@ -12,8 +12,10 @@ const getById = async (id) => {
 };
 
 const addProduct = async (name, quantity) => {
+  const check = await productsModel.checkProduct(name);
+  const verification = check.length === 0;
+  if (verification === false) return false;
   const product = await productsModel.addProduct(name, quantity);
-  if (product === false) return false;
   return product;
 };
 
