@@ -7,6 +7,8 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const sales = await salesModel.getById(id);
+  const verification = sales.lenght === 0;
+  if (verification === false) return false;
   return sales;
 };
 
