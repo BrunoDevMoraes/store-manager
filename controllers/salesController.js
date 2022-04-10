@@ -30,16 +30,15 @@ const addSale = async (req, res) => {
   }
 };
 
-const updateSale = async (_req, _res) => {
-  // const sales = req.body;
-  // const { id } = req.params;
-  // console.log(sales[0].productId, sales[0].quantity, id);
-  // try {
-  //   const sales = await salesService.updateSale(id, productId, quantity);
-  //   return res.status(200).json(sales);
-  // } catch (err) {
-  //     return res.status(500).send({ message: err.message });
-  // }
+const updateSale = async (req, res) => {
+  const sales = req.body;
+  const { id } = req.params;
+  try {
+    const answer = await salesService.updateSale(id, sales[0].productId, sales[0].quantity);
+    return res.status(200).json(answer);
+  } catch (err) {
+      return res.status(500).send({ message: err.message });
+  }
 };
 
 module.exports = {
