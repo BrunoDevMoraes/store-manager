@@ -4,7 +4,6 @@ const productsRoutes = require('./routes/productsRoutes');
 const salesRoutes = require('./routes/salesRoutes');
 
 const app = express();
-// const PORT = 3307;
 
 app.use(express.json());
 
