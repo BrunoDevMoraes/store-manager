@@ -36,7 +36,7 @@ const updateProduct = async (id, name, quantity) => {
 
 const deleteProduct = async (id) => {
   const oldProduct = await getById(id);
-  if (oldProduct.lenght === 0) return false;
+  if (!oldProduct) return false;
   const query = 'DELETE FROM StoreManager.products WHERE id = ?';
   await connection.execute(query, [id]);
   return true;

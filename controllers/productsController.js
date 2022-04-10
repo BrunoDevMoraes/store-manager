@@ -48,7 +48,7 @@ const deleteProduct = async (req, res) => {
   try {
     const product = await productsService.deleteProduct(id);
     if (product === false) return res.status(404).json({ message: 'Product not found' });
-    return res.status(204);
+    return res.status(204).json();
   } catch (err) {
       return res.status(500).send({ message: err.message });
   }
