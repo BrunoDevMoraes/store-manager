@@ -20,6 +20,16 @@ const getById = async (req, res) => {
   }
 };
 
+const addSale = async (req, res) => {
+  const productsArr = req.body;
+  try {
+    const sales = await salesService.addSale(productsArr);
+    return res.status(201).json(sales);
+  } catch (err) {
+      return res.status(500).send({ message: err.message });
+  }
+};
+
 const updateSale = async (req, res) => {
   const [{ productId, quantity }] = req.body;
   const { id } = req.params;
@@ -35,4 +45,5 @@ module.exports = {
   getAll,
   getById,
   updateSale,
+  addSale,
 };

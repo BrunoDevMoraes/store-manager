@@ -11,6 +11,11 @@ const getById = async (id) => {
   return sales;
 };
 
+const addSale = async (arr) => {
+  const sales = await salesModel.addSale(arr);
+  return sales;
+};
+
 const updateSale = async (id, productId, quantity) => {
   const sales = await salesModel.updateSale(id, productId, quantity);
   return sales;
@@ -20,4 +25,5 @@ module.exports = {
   getAll,
   getById,
   updateSale,
+  addSale,
 };

@@ -1,6 +1,6 @@
 const { ProductIdVerification, quantityVerification } = require('../helpers/salesHelpers');
 
-const checkProductBody = (req, res, next) => {
+const checkSaleBody = (req, res, next) => {
   const { productId, quantity } = req.body;
   const productIdStatus = ProductIdVerification(productId);
   const quantityStatus = quantityVerification(quantity);
@@ -14,5 +14,5 @@ const checkProductBody = (req, res, next) => {
 };
 
 module.exports = {
-  checkProductBody,
+  checkSaleBody,
 };
