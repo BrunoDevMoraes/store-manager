@@ -24,6 +24,12 @@ const fakeDataBase = [
   }
 ]
 
+const fakeProduct = {
+  id: 1,
+  name: "Martelo de Thor",
+  quantity: 10
+}
+
 describe('Products Model', () => {
   describe('when getAll is requested', () => {
     before(() => {
@@ -35,6 +41,30 @@ describe('Products Model', () => {
     it('should return all products', async () => {
       const result = await productsModel.getAll();
       expect(result).to.be.equals(fakeDataBase);
+    })
+  })
+  describe('when getById is requested', () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([[ fakeProduct ]])
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+    it('should return all products', async () => {
+      const result = await productsModel.getById(1);
+      expect(result).to.be.equals(fakeProduct);
+    })
+  })
+  describe('when addProduct is requested', () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([{ insertId: 1 }])
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+    it('should add a new product', async () => {
+      const result = await productsModel.addProduct(fakeProduct.name, fakeProduct.quantity);
+      expect(result).to.be.deep.equal(fakeProduct);
     })
   })
 })

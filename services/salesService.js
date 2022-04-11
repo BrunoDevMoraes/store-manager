@@ -22,7 +22,7 @@ const updateSale = async (id, sales) => {
     itemUpdated: [],
   };
   console.log(sales);
-  await Promise.all(sales.map(async (product, index) => {
+  await Promise.all(sales.map(async (_product, index) => {
     const answer = await salesModel.updateSale(id, sales[index].productId, sales[index].quantity);
     returnedObj.itemUpdated[index] = answer;
   }));
