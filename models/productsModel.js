@@ -12,7 +12,7 @@ const getById = async (id) => {
 };
 
 const addProduct = async (name, quantity) => {
-  const query2 = 'INSERT INTO products ( name, quantity) VALUES (?, ?, ?)';
+  const query2 = 'INSERT INTO products (name, quantity) VALUES (?, ?)';
   const result = await connection.execute(query2, [name, quantity]);
   return { id: result[0].insertId, name, quantity };
 };
