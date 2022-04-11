@@ -25,7 +25,7 @@ const addProduct = async (req, res) => {
   try {
     const product = await productsService.addProduct(object.name, object.quantity);
     if (product === false) return res.status(409).json({ message: 'Product already exists' });
-    return res.status(200).json(product);
+    return res.status(201).json(product);
   } catch (err) {
       return res.status(500).send({ message: err.message });
   }

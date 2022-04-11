@@ -2,9 +2,9 @@ const connection = require('./connection');
 
 const getAll = async () => {
   const [sales] = await connection.execute(`SELECT sale_id,  date, product_id, quantity
-  FROM StoreManager.sales_products
-  INNER JOIN StoreManager.sales
-  ON StoreManager.sales_products.sale_id = StoreManager.sales.id`);
+  FROM sales_products
+  INNER JOIN sales
+  ON sales_products.sale_id = sales.id`);
   return sales;
 };
 
