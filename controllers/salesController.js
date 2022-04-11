@@ -34,7 +34,7 @@ const updateSale = async (req, res) => {
   const sales = req.body;
   const { id } = req.params;
   try {
-    const answer = await salesService.updateSale(id, sales[0].productId, sales[0].quantity);
+    const answer = await salesService.updateSale(id, sales);
     return res.status(200).json(answer);
   } catch (err) {
       return res.status(500).send({ message: err.message });

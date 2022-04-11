@@ -16,9 +16,17 @@ const addSale = async (arr) => {
   return sales;
 };
 
-const updateSale = async (id, productId, quantity) => {
-  const sales = await salesModel.updateSale(id, productId, quantity);
-  return sales;
+const updateSale = async (id, sales) => {
+  const returnedObj = {
+    saleId: id,
+    itemUpdated: [],
+  };
+  console.log(sales);
+  await Promise.all(sales.map(async (product, index) => {
+    const answer = await salesModel.updateSale(id, sales[index].productId, sales[index].quantity);
+    returnedObj.itemUpdated[index] = answer;
+  }));
+  return returnedObj;
 };
 
 module.exports = {
